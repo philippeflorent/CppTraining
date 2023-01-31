@@ -398,9 +398,14 @@ int ex19()
 	return 0;
 }
 
+int ex20()
+{
+	return 0;
+}
+
 int main()
 {
-	return ex19();
+	return ex20();
 }
 
 // p233
