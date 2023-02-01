@@ -12,6 +12,9 @@ using std::vector;
 #include <iterator> // for begin/end on arrays
 using std::begin, std::end;
 
+#include <stdexcept>
+using std::runtime_error;
+
 int ex1()
 {
 	cout << "Enter two numbers:" << endl;
@@ -433,9 +436,44 @@ int ex20()
 	return 0;
 }
 
+int ex21()
+{
+	cout << "example: 0-201-78345-X 3 20.00" << endl;
+	cout << "example: 0-201-78345-X 2 25.00" << endl;
+
+	SalesItem item1, item2;
+	
+	//--------------------------------------------------------
+	while (cin >> item1 >> item2) {
+		try {
+			// execute code that will add the two Sales_items
+			// if the addition fails, the code throws a runtime_error exception
+
+			// first check that item1 and item2 represent the same book
+			if (item1.isbn() == item2.isbn()) {
+				cout << item1 + item2 << endl;
+				break;
+			}
+			else {
+				throw runtime_error("Data must refer to same ISBN");
+			}
+		}
+		catch (runtime_error err) {
+			// remind the user that the ISBNs must match and prompt for another pair
+			cout << err.what()
+				<< "\nTry Again? Enter y or n" << endl;
+			char c;
+			cin >> c;
+			if (!cin || c == 'n')
+				break; // break out of the while loop
+		}
+	}
+	return 0;
+}
+
 int main()
 {
-	return ex20();
+	return ex21();
 }
 
 // p233
