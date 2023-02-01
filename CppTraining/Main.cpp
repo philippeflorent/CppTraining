@@ -412,13 +412,30 @@ int ex19()
 
 int ex20()
 {
+	string rsp; // used in the condition; can't be defined inside the do
+	do {
+		cout << "please enter two values: ";
+		int val1 = 0, val2 = 0;
+		cin >> val1 >> val2;
+		cout << "The sum of " << val1 << " and " << val2
+			<< " = " << val1 + val2 << "\n\n"
+			<< "More? Enter yes or no: ";
+		cin >> rsp;
+	} while (!rsp.empty() && rsp[0] != 'n');
+
+	string buf;
+	while (cin >> buf && !buf.empty()) {
+		if (buf[0] != '_')
+			continue; // get another input
+		// still here? the input starts with an underscore; process buf . . .
+	}
+
 	return 0;
 }
 
 int main()
 {
-	return ex15();
-	//return ex20();
+	return ex20();
 }
 
 // p233
