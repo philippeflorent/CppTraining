@@ -473,7 +473,7 @@ int ex21()
 
 int main()
 {
-	return ex21();
+	return ex20();
 }
 
 // p233
