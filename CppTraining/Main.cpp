@@ -433,9 +433,29 @@ int ex20()
 	return 0;
 }
 
+int ex21()
+{
+	cout << "example: 0-201-78345-X 3 20.00" << endl;
+	cout << "example: 0-201-78345-X 2 25.00" << endl;
+
+	SalesItem item1, item2;
+	cin >> item1 >> item2;
+	// first check that item1 and item2 represent the same book
+	if (item1.isbn() == item2.isbn()) {
+		cout << item1 + item2 << endl;
+		return 0; // indicate success
+	}
+	else {
+		cerr << "Data must refer to same ISBN"
+			<< endl;
+		return -1; // indicate failure
+	}
+	return 0;
+}
+
 int main()
 {
-	return ex20();
+	return ex21();
 }
 
 // p233
