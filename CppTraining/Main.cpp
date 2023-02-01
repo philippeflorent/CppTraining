@@ -1,19 +1,7 @@
+#include "Tools.h"
 #include "SalesData.h"
 #include "SalesItem.h"
-
-#include <iostream>
-#include <iostream>
-#include <string>
-using std::string;
-// needs c++ command line/additional options -> /std:c++latest 
-using std::cout, std::cin, std::endl, std::cerr, std::clog;
-#include <vector>
-using std::vector;
-#include <iterator> // for begin/end on arrays
-using std::begin, std::end;
-
-#include <stdexcept>
-using std::runtime_error;
+#include "common.h"
 
 int ex1()
 {
@@ -22,7 +10,7 @@ int ex1()
 	cin >> v1 >> v2;
 	cout << "The sum of " << v1 << " and " << v2
 		<< " is " << v1 + v2 << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex2()
@@ -35,7 +23,7 @@ int ex2()
 	}
 	cout << "Sum of 1 to 10 inclusive is "
 		<< sum << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex3()
@@ -48,7 +36,7 @@ int ex3()
 	}
 	cout << "Sum of 1 to 10 inclusive is "
 		<< sum << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex4()
@@ -61,7 +49,7 @@ int ex4()
 		sum += value; // equivalent to sum = sum + value
 	}
 	cout << "Sum is: " << sum << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex5()
@@ -86,7 +74,7 @@ int ex5()
 		cout << currVal << " occurs "
 			<< cnt << " times" << endl;
 	} // outermost if statement ends here
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex6()
@@ -98,7 +86,7 @@ int ex6()
 	cin >> book;
 	// write ISBN, number of copies sold, total revenue, and average price
 	cout << book << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex7()
@@ -109,7 +97,7 @@ int ex7()
 	SalesItem item1, item2;
 	cin >> item1 >> item2;   // read a pair of transactions
 	cout << item1 + item2 << endl; // print their sum
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex8()
@@ -122,7 +110,7 @@ int ex8()
 	// first check that item1 and item2 represent the same book
 	if (item1.isbn() == item2.isbn()) {
 		cout << item1 + item2 << endl;
-		return 0;   // indicate success
+		return EXIT_SUCCESS;   // indicate success
 	}
 	else {
 		cerr << "Data must refer to same ISBN"
@@ -155,7 +143,7 @@ int ex9()
 		cerr << "No data?!" << endl;
 		return -1;// indicate failure
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex10()
@@ -163,7 +151,7 @@ int ex10()
 	cout << "cout test" << endl;
 	clog << "clog test" << endl;
 	cerr << "cerr test" << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex11()
@@ -178,7 +166,7 @@ int ex11()
 
 	cout << i - u << endl;
 	cout << u - i << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex12()
@@ -206,7 +194,7 @@ int ex12()
 			cout << "avg price per book " << (totalRevenue / totalCnt) << endl;
 		else
 			cout << "(no sales)" << endl;
-		return 0; // indicate success
+		return EXIT_SUCCESS; // indicate success
 	}
 	else {// transactions weren't for the same ISBN
 		cerr << "Data must refer to the same ISBN"
@@ -214,7 +202,7 @@ int ex12()
 		return -1; // indicate failure
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex13()
@@ -259,7 +247,7 @@ int ex13()
 		cout << c << " ";
 	}
 	cout << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex14()
@@ -277,7 +265,7 @@ int ex14()
 			result += hexdigits[n]; // fetch the indicated hex digit
 	cout << "Your hex number is: " << result << endl;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex15()
@@ -300,7 +288,7 @@ int ex15()
 		auto& r = *beg; // r must be a reference so we can change the element
 		r *= 2; // double the value of each element in v
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex16()
@@ -314,7 +302,7 @@ int ex16()
 	}
 	for (auto i : scores) // for each element in v
 		cout << i << " "; // print the element
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex17()
@@ -358,7 +346,7 @@ int ex17()
 		cout << "mid point " << *mid << endl;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex18()
@@ -385,7 +373,7 @@ int ex18()
 		cout << *i << " "; // print the value of that counter
 	cout << endl;
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex19()
@@ -410,7 +398,7 @@ int ex19()
 			col = (int)cnt; // give this element the next value
 			++cnt; // increment cnt
 		}
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex20()
@@ -433,7 +421,7 @@ int ex20()
 		// still here? the input starts with an underscore; process buf . . .
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex21()
@@ -468,12 +456,45 @@ int ex21()
 				break; // break out of the while loop
 		}
 	}
-	return 0;
+	return EXIT_SUCCESS;
+}
+
+int ex22()
+{
+	try {
+		std::vector<int> v = { 1, 2, 3, 4, 5 };
+		for (int i = 0; i < 10; i++)
+		{
+			v.at(i) = 10;
+		}
+	}
+	catch (exception err)
+	{
+		throw std::out_of_range("index out of range accessing 'v' vector");
+	}
+	return EXIT_SUCCESS;
+}
+
+int ex23()
+{
+	throw underflow_error("The number's a bit small, captain!");
 }
 
 int main()
 {
-	return ex20();
+	header();
+	try
+	{
+		return ex23();
+	}
+	catch (exception err)
+	{
+		cout << "caught exception : " << endl;
+		cout << err.what() << endl;
+		cout << typeid(err).name() << endl;
+		return EXIT_FAILURE;
+	}
+	footer();
 }
 
 // p233
