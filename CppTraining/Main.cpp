@@ -480,12 +480,33 @@ int ex23()
 	throw underflow_error("The number's a bit small, captain!");
 }
 
+int ex24()
+{
+	int j = factorial(5); // j equals 120, i.e., the result of fact(5)
+	cout << "factorial of 5 is " << j << endl;
+	return 0;
+}
+
+int ex25()
+{
+	for (size_t i = 0; i != 10; ++i)
+		cout << count_calls() << endl;
+	return 0;
+}
+
+int ex26()
+{
+	cout << (is_sentence("This is a phrase.") ? "sentence" : "not sentence") << endl;
+	cout << (is_sentence("This is not a phrase") ? "sentence" : "not sentence") << endl;
+	return 0;
+}
+
 int main()
 {
 	header();
 	try
 	{
-		return ex23();
+		return ex26();
 	}
 	catch (exception err)
 	{
