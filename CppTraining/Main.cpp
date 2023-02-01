@@ -3,6 +3,23 @@
 #include "SalesItem.h"
 #include "common.h"
 
+/*!
+* Philippe Florent 2023
+* Feel free to browe or corect any mistake from my part
+* 
+* The following functions are custom exercises I made for myself
+* Documentation is inside the functions themselves since it takes no parameters
+*
+* retval "EXIT_SUCCESS" everything went fine
+* retval "EXIT_FAILURE" something went wrong
+* 
+* the main program uses a try catch block
+* 
+* additional functions are located in Tools.cpp
+* 
+* Classes from the book have been renamed as Pascal case
+*/
+
 int ex1()
 {
 	cout << "Enter two numbers:" << endl;
@@ -484,38 +501,70 @@ int ex24()
 {
 	int j = factorial(5); // j equals 120, i.e., the result of fact(5)
 	cout << "factorial of 5 is " << j << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex25()
 {
 	for (size_t i = 0; i != 10; ++i)
 		cout << count_calls() << endl;
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 int ex26()
 {
 	cout << (is_sentence("This is a phrase.") ? "sentence" : "not sentence") << endl;
 	cout << (is_sentence("This is not a phrase") ? "sentence" : "not sentence") << endl;
-	return 0;
+	return EXIT_SUCCESS;
+}
+
+int ex27()
+{
+	// We cannot copy an array, and when we use an array it is(usually) converted to a pointer
+	char charArray[] = {'H','e','l','l','o',(char)NULL};
+	printArrayOldStyle(charArray);
+	line(true);
+
+	// better/new array passing
+	int intArray[] = { 1,2,4,8,16,32,64,128 };
+	int len = sizeof(intArray) / sizeof(int);
+	printArrayBegEnd(&intArray[0], &intArray[0] + len);
+	line(true);
+
+	// or
+	printArrayBegEnd(begin(intArray), end(intArray));
+	line(true);
+
+	// or print with size
+	int j[] = { 0, 1,2,3,4,5,6 }; // int array of size 2
+	printArrayWithSize(j, end(j) - begin(j));
+	line(true);
+
+	// or print by reference (size is contant)
+	int k[10] = { 0,1,2,3,4,5,6,7,8,9 };
+	printArrayReference(k);
+
+	return EXIT_SUCCESS;
 }
 
 int main()
 {
+	int res;
+
 	header();
 	try
 	{
-		return ex26();
+		res = ex27();
 	}
 	catch (exception err)
 	{
 		cout << "caught exception : " << endl;
 		cout << err.what() << endl;
 		cout << typeid(err).name() << endl;
-		return EXIT_FAILURE;
+		res = EXIT_FAILURE;
 	}
 	footer();
+	return res;
 }
 
-// p233
+// p285

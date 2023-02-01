@@ -1,5 +1,10 @@
 #include "tools.h"
 
+/*!
+Function that outputs a line of '=' on the console and an end of line character
+
+\param[in] empty           if true, only the new line is output
+*/
 void line(bool empty)
 {
 	if (!empty)
@@ -12,6 +17,9 @@ void line(bool empty)
 	cout << endl;
 }
 
+/*!
+Function that outputs my header
+*/
 void header()
 {
 	line(false);
@@ -22,13 +30,22 @@ void header()
 	line(true);
 }
 
+/*!
+Function that outputs my footer
+*/
 void footer()
 {
+	line(true);
 	line(true);
 	line(false);
 }
 
-// factorial of val is val * (val - 1) * (val - 2) . . . * ((val - (val - 1)) * 1)
+/*!
+Function that outputs the factorial of val is val * (val - 1) * (val - 2) . . . * ((val - (val - 1)) * 1)
+
+\param[in] val		the value to factorize
+\retval ret"		the factorial value
+*/
 int factorial(int val)
 {
 	int ret = 1; // local variable to hold the result as we calculate it
@@ -37,8 +54,8 @@ int factorial(int val)
 	return ret; // return the result
 }
 
-/*
- static local variables in function keep their values
+/*!
+Function that counts calls with a static local variable that keep its value
 */
 size_t count_calls()
 {
@@ -46,9 +63,16 @@ size_t count_calls()
 	return ++ctr;
 }
 
-// returns the index of the first occurrence of c in s
-// the reference parameter occurs counts how often c occurs
-// use const when parameter is read only!!
+/*!
+Function that returns the index of the first occurrence of c in s
+- the reference parameter occurs counts how often c occurs
+- use const when parameter is read only!!
+
+\param[in] s			string to parse
+\param[in] c			character to search for
+\param[in] occurs		occurences counter
+\retval ret				first occurence
+*/
 string::size_type find_char(const string& s, char c, string::size_type& occurs)
 {
 	auto ret = s.size(); // position of the first occurrence, if any
@@ -63,6 +87,12 @@ string::size_type find_char(const string& s, char c, string::size_type& occurs)
 	return ret; // count is returned implicitly in occurs
 }
 
+/*!
+Function that check if phrase as an ending '.' character
+
+\param[in] s			string to parse
+\retval bool			is sentence
+*/
 bool is_sentence(const string& s)
 {
 	// if there's a single period at the end of s, then s is a sentence
@@ -71,3 +101,53 @@ bool is_sentence(const string& s)
 	return find_char(s, '.', ctr) == s.size() - 1 && ctr == 1;
 }
 
+/*!
+Function that parse an array - old style array passing needs a NULL terminator
+
+\param[in] cp	array pointer (must terminate with NULL element !!)
+*/
+void printArrayOldStyle(const char* cp)
+{
+	if (cp) // if cp is not a null pointer
+		while (*cp) // so long as the character it points to is not a null character
+			cout << *cp++; // print the character and advance the pointer
+}
+
+
+/*!
+Function that parse an array - better array passing
+
+\param[in] beg			start of array
+\param[in] end			end of array
+*/
+void printArrayBegEnd(const int* beg, const int* end)
+{
+	// print every element starting at beg up to but not including end
+	while (beg != end)
+		cout << *beg++ << " "; // print the current element
+	// and advance the pointer
+}
+
+/*!
+Function that parse an array - better array passing with size parameter
+
+\param[in] ia			array to parse
+\param[in] size			size of array
+*/
+void printArrayWithSize(const int ia[], size_t size)
+{
+	for (size_t i = 0; i != size; ++i) {
+		cout << ia[i] << " ";
+	}
+}
+
+/*!
+Function that parse an array - parameter is a reference to an array; the dimension is part of the type
+
+\param[in] arr			array to parse, size is fixed
+*/
+void printArrayReference(int(&arr)[10])
+{
+	for (auto elem : arr)
+		cout << elem << " ";
+}
