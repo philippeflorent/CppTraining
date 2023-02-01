@@ -282,8 +282,14 @@ int ex15()
 	vector<int> v{ 1,2,3,4,5,6,7,8,9 };
 	for (auto& i : v) // for each element in v (note: i is a reference)
 		i *= i; // square the element value
+	
 	for (auto i : v) // for each element in v
 		cout << i << " "; // print the element
+	cout << endl;
+
+	for (decltype(v.size()) index = 0;index != v.size(); ++index)
+		cout << v[index] << " is " << ( (v[index] % 2 == 0) ? "even" :"odd") << endl; // print the element
+
 	cout << endl;
 	return 0;
 }
@@ -405,7 +411,8 @@ int ex20()
 
 int main()
 {
-	return ex20();
+	return ex15();
+	//return ex20();
 }
 
 // p233
