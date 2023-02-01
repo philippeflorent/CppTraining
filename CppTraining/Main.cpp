@@ -282,9 +282,21 @@ int ex15()
 	vector<int> v{ 1,2,3,4,5,6,7,8,9 };
 	for (auto& i : v) // for each element in v (note: i is a reference)
 		i *= i; // square the element value
+	
 	for (auto i : v) // for each element in v
 		cout << i << " "; // print the element
 	cout << endl;
+
+	for (decltype(v.size()) index = 0;index != v.size(); ++index)
+		cout << v[index] << " is " << ( (v[index] % 2 == 0) ? "even" :"odd") << endl; // print the element
+
+	cout << endl;
+	
+	for (auto beg = v.begin(), end = v.end(); beg != end; ++beg)
+	{
+		auto& r = *beg; // r must be a reference so we can change the element
+		r *= 2; // double the value of each element in v
+	}
 	return 0;
 }
 
@@ -383,7 +395,7 @@ int ex19()
 		// for each column within the row
 		for (size_t j = 0; j != colCnt; ++j) {
 			// assign the element's positional index as its value
-			ia[i][j] = i * colCnt + j;
+			ia[i][j] = (int)(i * colCnt + j);
 		}
 	}
 
@@ -392,7 +404,7 @@ int ex19()
 	size_t cnt = 0;
 	for (auto& row : ia) // for every element in the outer array
 		for (auto& col : row) { // for every element in the inner array
-			col = cnt; // give this element the next value
+			col = (int)cnt; // give this element the next value
 			++cnt; // increment cnt
 		}
 	return 0;
@@ -405,7 +417,8 @@ int ex20()
 
 int main()
 {
-	return ex20();
+	return ex15();
+	//return ex20();
 }
 
 // p233
