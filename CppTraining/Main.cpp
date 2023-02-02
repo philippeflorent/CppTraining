@@ -1,6 +1,8 @@
 #include "Tools.h"
 #include "SalesData.h"
 #include "SalesItem.h"
+#include "WindowMgr.h"
+#include "Screen.h"
 #include "Common.h"
 
 /*!
@@ -605,6 +607,37 @@ int ex31()
 	return EXIT_SUCCESS;
 }
 
+int ex32()
+{
+	Screen myScreen;
+	char ch = myScreen.get();// calls Screen::get()
+	ch = myScreen.get(0, 0); // calls Screen::get(pos, pos)
+	myScreen.move(4, 0).set('#').display(cout); // calls non const version of display
+
+	const Screen blank(5, 3, '_');
+	blank.display(cout); // calls const version of display
+	return EXIT_SUCCESS;
+}
+
+int ex33()
+{
+	// constructs a temporary Sales_data object
+	// with units_sold and revenue equal to 0 and bookNo equal to null_book
+	SalesData item;
+	string null_book = "9-999-99999-9";
+	item.combine(null_book);
+	// ok: explicit conversion to string, implicit conversion to Sales_data
+	item.combine(string("9-999-99999-9"));
+	// ok: implicit conversion to string, explicit conversion to Sales_data
+	item.combine(SalesData("9-999-99999-9"));
+	// error: requires two user-defined conversions:
+	// (1) convert "9-999-99999-9" to string
+	// (2) convert that (temporary) string to Sales_data
+	//item.combine("9-999-99999-9");
+
+	return EXIT_SUCCESS;
+}
+
 int main()
 {
 	int res;
@@ -612,7 +645,7 @@ int main()
 	header();
 	try
 	{
-		res = ex31();
+		res = ex33();
 	}
 	catch (exception err)
 	{

@@ -9,10 +9,17 @@ public:
 	friend istream& read(istream&, SalesData&);
 	friend ostream& print(ostream&, const SalesData&);
 	// constructors added
-	SalesData() = default;
-	SalesData(const string& s) : bookNo(s) { }
+	//SalesData() = default;
+	//SalesData(const string& s) : bookNo(s) { }
 	SalesData(const string& s, unsigned n, double p) : bookNo(s), units_sold(n), revenue(p* n) { }
-	SalesData(istream&);
+	//SalesData(istream&);
+	// remaining constructors all delegate to another constructor
+	SalesData() : SalesData("", 0, 0) {}
+	SalesData(std::string s) : SalesData(s, 0, 0) {}
+	SalesData(std::istream& is) : SalesData()
+	{
+		read(is, *this);
+	}
 	// new members: operations on SalesData objects
 	string isbn() const { return bookNo; }
 	SalesData& combine(const SalesData&);

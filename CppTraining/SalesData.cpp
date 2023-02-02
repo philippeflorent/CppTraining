@@ -28,10 +28,10 @@ SalesData& SalesData::combine(const SalesData& rhs)
 * Function that reads a book from istream
 \param[in] is		input stream to read the book from
 */
-SalesData::SalesData(std::istream& is)
+/*SalesData::SalesData(std::istream& is)
 {
 	read(is, *this); // read will read a transaction from is into this object
-}
+}*/
 
 // non member functions 
 
