@@ -1,7 +1,7 @@
 #include "Tools.h"
 #include "SalesData.h"
 #include "SalesItem.h"
-#include "common.h"
+#include "Common.h"
 
 /*!
 * Philippe Florent 2023
@@ -98,7 +98,7 @@ int ex5()
 
 int ex6()
 {
-	cout << "example: 0-201-70353-X 4 24.99" << endl;
+	exampleBooks();
 
 	SalesItem book;
 	// read ISBN, number of copies sold, and sales price
@@ -110,8 +110,7 @@ int ex6()
 
 int ex7()
 {
-	cout << "example: 0-201-78345-X 3 20.00" << endl;
-	cout << "example: 0-201-78345-X 2 25.00" << endl;
+	exampleBooks();
 	
 	SalesItem item1, item2;
 	cin >> item1 >> item2;   // read a pair of transactions
@@ -121,8 +120,7 @@ int ex7()
 
 int ex8()
 {
-	cout << "example: 0-201-78345-X 3 20.00" << endl;
-	cout << "example: 0-201-78345-X 2 25.00" << endl;
+	exampleBooks();
 
 	SalesItem item1, item2;
 	cin >> item1 >> item2;
@@ -192,18 +190,14 @@ int ex12()
 {
 	SalesData data1, data2;
 	// code to read into data1 and data2
-	cout << "example: 0-201-78345-X 3 20.00" << endl;
-	cout << "example: 0-201-78345-X 2 25.00" << endl;
+	exampleBooks();
 
 	double price1 = 0, price2 = 0;
-	cin >> data1.bookNo >> data1.units_sold >> price1;
-	cin >> data2.bookNo >> data2.units_sold >> price2;
-
-	data1.revenue = price1 * data1.units_sold;
-	data2.revenue = price2 * data2.units_sold;
+	read(cin, data1);
+	read(cin, data2);
 
 	// code to check whether data1 and data2 have the same ISBN
-	if (data1.bookNo == data2.bookNo) {
+	/*if (data1.bookNo == data2.bookNo) {
 		unsigned totalCnt = data1.units_sold + data2.units_sold;
 		double totalRevenue = data1.revenue + data2.revenue;
 		// print: ISBN, total sold, total revenue, average price per book
@@ -220,7 +214,7 @@ int ex12()
 			<< endl;
 		return -1; // indicate failure
 	}
-
+	*/
 	return EXIT_SUCCESS;
 }
 
@@ -445,8 +439,7 @@ int ex20()
 
 int ex21()
 {
-	cout << "example: 0-201-78345-X 3 20.00" << endl;
-	cout << "example: 0-201-78345-X 2 25.00" << endl;
+	exampleBooks();
 
 	SalesItem item1, item2;
 	
@@ -578,6 +571,40 @@ int ex29()
 	return EXIT_SUCCESS;
 }
 
+int ex30()
+{
+#ifndef NDEBUG
+	int c = 0;
+	cerr << "array size is " << 0 << " in function " << __func__ << " in file " << __FILE__ << " in line " << __LINE__ << " @ " << __TIME__ << " on " << __DATE__ << endl;
+	assert(c>0);
+#endif
+	return EXIT_SUCCESS;
+}
+
+int ex31()
+{
+	exampleBooks();
+
+	SalesData total; // variable to hold the running sum
+	if (read(cin, total)) { // read the first transaction
+		SalesData trans; // variable to hold data for the next transaction
+		while (read(cin, trans)) { // read the remaining transactions
+			if (total.isbn() == trans.isbn()) // check the isbns
+				total.combine(trans); // update the running total
+			else {
+				print(cout, total) << endl; // print the results
+				total = trans; // process the next book
+			}
+		}
+		print(cout, total) << endl; // print the last transaction
+	}
+	else { // there was no input
+		cerr << "No data?!" << endl; // notify the user
+	}
+
+	return EXIT_SUCCESS;
+}
+
 int main()
 {
 	int res;
@@ -585,7 +612,7 @@ int main()
 	header();
 	try
 	{
-		res = ex28();
+		res = ex31();
 	}
 	catch (exception err)
 	{

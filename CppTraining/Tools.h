@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "Common.h"
 
 /*
 	presentation
@@ -8,6 +8,7 @@
 void line(bool empty);
 void header();
 void footer();
+void exampleBooks();
 
 /*
 	exercices functions from the book

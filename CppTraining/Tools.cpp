@@ -1,4 +1,4 @@
-#include "tools.h"
+#include "Tools.h"
 
 /*!
 Function that outputs a line of '=' on the console and an end of line character
@@ -41,10 +41,19 @@ void footer()
 }
 
 /*!
+Function that displays examples of ISBN books
+*/
+void exampleBooks()
+{
+	cout << "example: 0-201-78345-X 3 20.00" << endl;
+	cout << "example: 0-201-78345-X 2 25.00" << endl;
+}
+
+/*!
 Function that outputs the factorial of val is val * (val - 1) * (val - 2) . . . * ((val - (val - 1)) * 1)
 
 \param[in] val		the value to factorize
-\retval ret"		the factorial value
+\retval ret			the factorial value
 */
 int factorial(int val)
 {
@@ -58,7 +67,7 @@ int factorial(int val)
 Function (recursive) that outputs the factorial of val is val * (val - 1) * (val - 2) . . . * ((val - (val - 1)) * 1)
 
 \param[in] val		the value to factorize
-\retval ret"		a recursive call to itself or 1, ulltimately returning the factorial of val
+\retval ret			a recursive call to itself or 1, ulltimately returning the factorial of val
 */
 int factorialRecursive(int val)
 {

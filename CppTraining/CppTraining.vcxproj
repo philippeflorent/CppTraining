@@ -129,11 +129,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SalesData.h" />
+    <ClCompile Include="SalesData.cpp" />
     <ClCompile Include="Tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="SalesData.h" />
     <ClInclude Include="SalesItem.h" />
     <ClInclude Include="Tools.h" />
   </ItemGroup>
