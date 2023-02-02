@@ -55,6 +55,19 @@ int factorial(int val)
 }
 
 /*!
+Function (recursive) that outputs the factorial of val is val * (val - 1) * (val - 2) . . . * ((val - (val - 1)) * 1)
+
+\param[in] val		the value to factorize
+\retval ret"		a recursive call to itself or 1, ulltimately returning the factorial of val
+*/
+int factorialRecursive(int val)
+{
+	if (val > 1)
+		return factorialRecursive(val - 1) * val;
+	return 1;
+}
+
+/*!
 Function that counts calls with a static local variable that keep its value
 */
 size_t count_calls()
@@ -151,3 +164,47 @@ void printArrayReference(int(&arr)[10])
 	for (auto elem : arr)
 		cout << elem << " ";
 }
+
+/*!
+Function that receives a variable number of arguments
+
+\param[in] e		additional parameter outside of the list
+\param[in] il		list of arguments
+*/
+void error_msg(ErrCode e, initializer_list<string> il)
+{
+	cout << e.msg() << ": ";
+	for (const auto& elem : il)
+		cout << elem << " ";
+	cout << endl;
+}
+
+/*!
+Function that returns a braced list as a vector of string
+
+\param[in] expected		some string
+\param[in] actual		some other string
+*/
+vector<string> process(string expected, string actual)
+{
+	// . . .
+	// expected and actual are strings
+	if (expected.empty())
+		return {}; // return an empty vector
+	else if (expected == actual)
+		return { "functionX", "okay" }; // return list-initialized vector
+	else
+		return { "functionX", expected, actual };
+}
+
+/*!
+Function that returns a reference (so an Lvalue)
+
+\param[in] str		string of chars to parse
+\param[in] ix		index in the string of the char to return a reference of
+*/
+char& get_val(string& str, string::size_type ix)
+{
+	return str[ix]; // get_val assumes the given index is valid
+}
+

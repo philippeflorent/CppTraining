@@ -18,6 +18,8 @@
 * additional functions are located in Tools.cpp
 * 
 * Classes from the book have been renamed as Pascal case
+* 
+* current page of book p288
 */
 
 int ex1()
@@ -501,6 +503,8 @@ int ex24()
 {
 	int j = factorial(5); // j equals 120, i.e., the result of fact(5)
 	cout << "factorial of 5 is " << j << endl;
+	int k = factorialRecursive(5);
+	cout << "factorial(recursive) of 5 is " << j << endl;
 	return EXIT_SUCCESS;
 }
 
@@ -547,6 +551,33 @@ int ex27()
 	return EXIT_SUCCESS;
 }
 
+int ex28()
+{
+	// variable functioin arguments with initializer's list
+	error_msg(ErrCode(42), { "functionX", "expected", "actual" });
+	line(true);
+
+	// function that returns a braced list of string
+	vector<string> res=process("expected", "actual");
+	for (auto beg = res.begin(), end = res.end(); beg != end; ++beg)
+	{
+		auto& s = *beg; // r must be a reference so we can change the element
+		cout << s << " ";
+	}
+
+	return EXIT_SUCCESS;
+}
+
+int ex29()
+{
+	string s("a value");
+	cout << s << endl; // prints a value
+	get_val(s, 0) = 'A'; // changes s[0] to A
+	cout << s << endl; // prints A value
+	
+	return EXIT_SUCCESS;
+}
+
 int main()
 {
 	int res;
@@ -554,7 +585,7 @@ int main()
 	header();
 	try
 	{
-		res = ex27();
+		res = ex28();
 	}
 	catch (exception err)
 	{
@@ -567,4 +598,3 @@ int main()
 	return res;
 }
 
-// p285
